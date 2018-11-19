@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>jR3DCarousel - a jQuery 3D Responsive Carousel</title>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Big Bets</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/select.css" rel="stylesheet">
+    <link href="https://www.santander.com.br/Theme_WCSantanderUK-theme/images/favicon.ico" rel="Shortcut Icon" />
+    <!-- Theme CSS -->
+    <link href="css/freelancer.min.css" rel="stylesheet">
+    <link href="css/tiktok.css" rel="stylesheet">
+     
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="dist/jR3DCarousel.min.js"></script>
+
+  <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/freelancer.min.js"></script>
+<script src="js/tiktok.js"></script>
+<script src="js/tiktok.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+ var slides = [{src: 'js_carosel_img/002.jpg'}, {src: 'js_carosel_img/Header.jpg'}]
+	var jR3DCarousel;
+	var carouselProps =  {
+			 		  width: 1200, 				/* largest allowed width */
+					  height: 500, 				/* largest allowed height */
+					  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
+					  animation: 'scroll3D', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
+					  animationCurve: 'ease',
+					  animationDuration: 700,
+					  animationInterval: 1000,
+					  //slideClass: 'jR3DCarouselCustomSlide',
+					  autoplay: false,
+					  onSlideShow: show,		/* callback when Slide show event occurs */
+					  navigation: 'circles',	/* circles | squares */
+					  slides: slides 			/* array of images source or gets slides by 'slide' class */
+						  
+				}
+	function setUp(){
+ 		jR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel(carouselProps);
+
+		$('.settings').html('<pre>$(".jR3DCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>');		
+		
+	}
+	function show(slide){
+		console.log("Slide shown: ", slide.find('img').attr('src'))
+	}
+	$('.carousel-props input').change(function(){
+		if(isNaN(this.value))
+			carouselProps[this.name] = this.value || null; 
+		else
+			carouselProps[this.name] = Number(this.value) || null; 
+		
+		for(var i = 0; i < 999; i++)
+	     clearInterval(i);
+		$('.jR3DCarouselGallery').empty();
+		setUp();
+		jR3DCarousel.showNextSlide();
+	})
+	
+	$('[name=slides]').change(function(){
+		carouselProps[this.name] = getSlides(this.value); 
+		for (var i = 0; i < 999; i++)
+	     clearInterval(i);
+		$('.jR3DCarouselGallery').empty();
+		setUp();
+		jR3DCarousel.showNextSlide();		
+	});
+	
+
+	//carouselProps.slides = getSlides(7);
+	setUp()
+
+  })
+</script>
+
+<style type="text/css">
+
+
+.jR3DCarouselGallery,.jR3DCarouselGallery1 {
+	margin: 0 auto; /* optional - if want to center align */
+}
+
+
+</style>
+</head>
+
+<body>
+	<div class="container">
+	
+		<div>
+			<div class="jR3DCarouselGallery"></div>
+		</div>
+		<br/>
+	</div>
+	
+</body>
+</html>
